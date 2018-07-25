@@ -2,7 +2,7 @@
 {* $video array *}
 {define item}
     <item>
-        <title>{$video['title']}</title>
+        <title>{$video['title']|cleaner}</title>
         <author>{$video['channel']}</author>
         <pubDate>{$video['publishedAt']->format('D, d M Y H:i:s O')}</pubDate>
         {var $link = 'http://youtube.com/watch?v='.$video['videoId']}
