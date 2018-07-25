@@ -1,0 +1,36 @@
+{layout '../@layout.latte'}
+
+{block content}
+    <h2>Admin Summary</h2>
+    <p>
+        Database connection: {YouTubeRSS\Model\Services\Db::$connected ? 'OK' : 'FAILED'}
+        <br>
+        Database table: {$check ? 'OK' : 'FAILED'}
+        {if $check === false}<a href="{YouTubeRSS\Utils\Links::generate('admin','create-table')}">Create table</a>{/if}
+    </p>
+    
+    <h3>Users</h3>
+
+    {if}
+        <table>
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>connected</th>
+            <th>counter</th>
+            <th>timestamp</th>
+        </tr>
+        {foreach $summary as $line}
+            <tr>
+                <td>{$line['id']}</td>
+                <td>{$line['username']}</td>
+                <td>{$line['accessToken'] ? 'Yes' : 'No'}</td>
+                <td>{$line['counter']}</td>
+                <td>{$line['ts']}</td>
+            </tr>
+        {/foreach}
+        </table>
+    {else}
+        No registered users.
+    {/if isset($line)}
+{/block}

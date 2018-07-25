@@ -1,0 +1,32 @@
+{contentType text/xml; charset=utf-8}
+{* $video array *}
+{define item}
+    <item>
+        <title>{$video['title']}</title>
+        <author>{$video['channel']}</author>
+        <pubDate>{$video['publishedAt']->format('D, d M Y H:i:s O')}</pubDate>
+        {var $link = 'http://youtube.com/watch?v='.$video['videoId']}
+        <guid isPermaLink="true">{$link}</guid>
+        <link>{$link}</link>
+        <description><![CDATA[
+            <table style="font-family:arial,verdana,tahoma;"><tr>
+            <td style="vertical-align:top;padding-right:5px;">
+                <a href="{$link}"><img 
+                src="{$video['thumbnail_url']}" alt="" 
+                style="width:{$video['thumbnail_width']*0.65}px;
+                height:{$video['thumbnail_height']*0.65}px;"></a>
+            </td>
+            <td style="vertical-align:top;">
+                <strong><a href="{$link}">{$video['title']|cleaner}</a></strong><br>
+                <p style="padding:0;margin:5px 0 7px 0;">
+                <small>{$video['description']|cleaner}</small>
+                </p>
+                <div style="font-size:11px;">
+                <span style="color:#666666;">Time:</span> 
+                <strong>{$video['duration']}</strong>
+                </div>
+            </td>
+            </tr></table>
+        ]]></description>
+    </item>
+{/define}

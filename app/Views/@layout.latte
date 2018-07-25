@@ -1,0 +1,17 @@
+{contentType text/html; charset=utf-8}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{YouTubeRSS\Constants::title}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="author" content="{YouTubeRSS\Constants::author}">
+        {block head}{/block}
+    </head>
+    <body>
+        <div>
+            <h1><a href="{YouTubeRSS\Utils\Links::generateFull()}">{YouTubeRSS\Constants::title}</a></h1>
+            <h3>{YouTubeRSS\Constants::moto}</h3>
+            {block content}{/block}
+        </div>
+    </body>
+</html>
