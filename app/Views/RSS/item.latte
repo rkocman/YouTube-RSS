@@ -14,17 +14,19 @@
                 <a href="{$link}"><img 
                 src="{$video['thumbnail_url']}" alt="" 
                 style="width:{$video['thumbnail_width']*0.65}px;
-                height:{$video['thumbnail_height']*0.65}px;"></a>
+                min-width:{$video['thumbnail_width']*0.65}px;
+                height:{$video['thumbnail_height']*0.65}px;
+                min-height:{$video['thumbnail_height']*0.65}px"></a>
             </td>
             <td style="vertical-align:top;">
-                <strong><a href="{$link}">{$video['title']|cleaner}</a></strong><br>
+                <strong><big><a href="{$link}">{$video['title']|cleaner}</a></big></strong><br>
                 <p style="padding:0;margin:5px 0 7px 0;">
-                <small>{$video['description']|cleaner}</small>
+                {$video['description']|cleaner}
                 </p>
-                <div style="font-size:11px;">
+                <div><small>
                 <span style="color:#666666;">Time:</span> 
                 <strong>{$video['duration']}</strong>
-                </div>
+                </small></div>
             </td>
             </tr></table>
         ]]></description>
