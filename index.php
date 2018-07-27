@@ -12,10 +12,10 @@ use Nette\Loaders\RobotLoader;
 use Nette\Caching\Storages\FileStorage;
 
 // load a config
-require_once 'config.php';
+require_once __DIR__.'/config.php';
 
 // composer autoloader
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 // tracy debugger
 $mode = (AppConfig::devel)? Debugger::DEVELOPMENT : Debugger::PRODUCTION;
