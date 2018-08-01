@@ -15,5 +15,8 @@
         "nette/security": "^2.3",
         "nette/forms": "^2.3",
         "nette/utils": "^2.3"
+    },
+    "replace": {
+        "google/apiclient-services": "*"
     }
 }
