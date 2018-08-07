@@ -1,37 +1,41 @@
 {layout '../@layout.latte'}
+{import 'parts/contentBlock.latte'}
+
+{block headerContent}
+    <a href="{YouTubeRSS\Utils\Links::generate('admin')}">Admin</a>
+{/block}
 
 {block content}
-    <p>
-        <a href="{YouTubeRSS\Utils\Links::generate('admin')}">Admin</a>
-    </p>
-    <br>
-
     {if YouTubeRSS\Utils\Sessions::$user->isLogged() === false}
 
-        <h2>Log In</h2>
-        <p>
+        {var $title = 'Log In'}
+        {capture $content}
             <a href="{YouTubeRSS\Utils\Links::generate('login')}">Log in</a><br>
             <a href="{YouTubeRSS\Utils\Links::generate('rss')}">RSS feed</a><br>
-        </p>
-        <br>
+        {/capture}
+        {include contentBlock, title => $title, content => $content, maxWidth => 250}
 
-        <h2>Sign Up</h2>
-        <p>
+        {var $title = 'Sign Up'}
+        {capture $content}
             <a href="{YouTubeRSS\Utils\Links::generate('signup')}">Start</a><br>
-        </p>
+        {/capture}
+        {include contentBlock, title => $title, content => $content, maxWidth => 250}
 
     {else}
-        
-        <h2>User: {YouTubeRSS\Utils\Sessions::$user->username}</h2>
-        <p>
+
+        {capture $title}
+            User: {YouTubeRSS\Utils\Sessions::$user->username}
+        {/capture}
+        {capture $content}
             {if YouTubeRSS\Utils\Sessions::$user->isConnected() === false}
                 <a href="{YouTubeRSS\Utils\Links::generate('connect')}">Connect with YouTube</a><br>
             {else}
                 <a href="{YouTubeRSS\Utils\Links::generate('rss')}">RSS feed</a><br>
             {/if}
-            <br>
+            <hr>
             <a href="{YouTubeRSS\Utils\Links::generate('logout')}">Log out</a><br>
-        </p>
+        {/capture}
+        {include contentBlock, title => $title, content => $content, maxWidth => 250}
 
     {/if}
 {/block}

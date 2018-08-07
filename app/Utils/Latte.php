@@ -8,6 +8,7 @@
 namespace YouTubeRSS\Utils;
 
 use YouTubeRSS\AppConfig;
+use Nette\Forms\Form;
 
 /**
  * Latte engine handler.
@@ -51,9 +52,45 @@ class Latte
     /** 
      * Renders the template.
      */
-    public static function render($template, array $params = []) {
+    public static function render($template, array $params = []) 
+    {
         $latte = self::getLatte();
         $latte->render(Path::getViews().$template, $params);
+    }
+
+    /**
+     * Sets the rendering of the form for Bootstrap 4.
+     */
+    public static function setFormLayout(\Nette\Forms\Form $form)
+    {
+        $renderer = $form->getRenderer();
+        $renderer->wrappers['controls']['container'] = null;
+        $renderer->wrappers['pair']['container'] = 'div class="form-group row"';
+        $renderer->wrappers['control']['container'] = 'div class=col-sm-8';
+        $renderer->wrappers['label']['container'] = 'div class="col-sm-4 col-form-label"';
+        $renderer->wrappers['control']['description'] = 'span class="form-text text-muted"';
+        $renderer->wrappers['control']['errorcontainer'] = 'div class=invalid-feedback style="display:block;"';
+        $renderer->wrappers['error']['container'] = 'ul class=text-danger';
+
+        foreach ($form->getControls() as $control) {
+            $type = $control->getControlPrototype()->type;
+            if (in_array($type, ['button', 'submit'], true)) {
+                $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
+                $usedPrimary = true;
+            } elseif (in_array($type, ['text', 'textarea', 'select', 'password'], true)) {
+                $control->getControlPrototype()->addClass('form-control');
+            } elseif ($type === 'file') {
+                $control->getControlPrototype()->addClass('form-control-file');
+            } elseif (in_array($type, ['checkbox', 'radio'], true)) {
+                if ($control instanceof \Nette\Forms\Controls\Checkbox) {
+                    $control->getLabelPrototype()->addClass('form-check-label');
+                } else {
+                    $control->getItemLabelPrototype()->addClass('form-check-label');
+                }
+                $control->getControlPrototype()->addClass('form-check-input');
+                $control->getSeparatorPrototype()->setName('div')->addClass('form-check');
+            }
+        }
     }
 
 }

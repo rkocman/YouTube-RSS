@@ -1,36 +1,61 @@
 {layout '../@layout.latte'}
+{import '../App/parts/contentBlock.latte'}
+
+{capture $statusOk}
+    <span class="text-success">OK</span>
+{/capture}
+{capture $statusFailed}
+    <span class="text-danger">FAILED</span>
+{/capture}
 
 {block content}
-    <h2>Admin Summary</h2>
-    <p>
-        Database connection: {YouTubeRSS\Model\Services\Db::$connected ? 'OK' : 'FAILED'}
-        <br>
-        Database table: {$check ? 'OK' : 'FAILED'}
-        {if $check === false}<a href="{YouTubeRSS\Utils\Links::generate('admin','create-table')}">Create table</a>{/if}
-    </p>
-    
-    <h3>Users</h3>
+    <div class="row mb-3">
+        <div class="col">
+            <h2>Admin Summary</h2>
+        </div>
+    </div>
 
-    {if}
-        <table>
-        <tr>
-            <th>id</th>
-            <th>username</th>
-            <th>connected</th>
-            <th>counter</th>
-            <th>timestamp</th>
-        </tr>
-        {foreach $summary as $line}
-            <tr>
-                <td>{$line['id']}</td>
-                <td>{$line['username']}</td>
-                <td>{$line['accessToken'] ? 'Yes' : 'No'}</td>
-                <td>{$line['counter']}</td>
-                <td>{$line['ts']}</td>
-            </tr>
-        {/foreach}
-        </table>
-    {else}
-        No registered users.
-    {/if isset($line)}
+    {var $title = 'Database Settings'}
+    {capture $content}
+        Database connection: {YouTubeRSS\Model\Services\Db::$connected ? $statusOk : $statusFailed}<br>
+        Database table: {$check ? $statusOk : $statusFailed}
+        {if YouTubeRSS\Model\Services\Db::$connected && $check === false}
+            (<a href="{YouTubeRSS\Utils\Links::generate('admin','create-table')}">Create table</a>)
+        {/if}
+    {/capture}
+    {include contentBlock, title => $title, content => $content}
+
+    {var $title = 'Users'}
+    {capture $content}
+        {if}
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>username</th>
+                            <th>connected</th>
+                            <th>counter</th>
+                            <th>timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $summary as $line}
+                        <tr>
+                            <td>{$line['id']}</td>
+                            <td>{$line['username']}</td>
+                            <td>{$line['accessToken'] ? 'Yes' : 'No'}</td>
+                            <td>{$line['counter']}</td>
+                            <td>{$line['ts']->format('Y-m-d H:i:s')}</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        {else}
+            No registered users.
+        {/if isset($line)}
+    {/capture}
+    {include contentBlock, title => $title, content => $content, noPadding => true}
+    
 {/block}

@@ -1,0 +1,20 @@
+{contentType text/html; charset=utf-8}
+{* $title string *}
+{* $content html *}
+{* $maxWidth integer *}
+{* $contentLeft bool *}
+{* $noPadding bool *}
+{define contentBlock}
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card mx-auto shadow-sm" {ifset $maxWidth}style="max-width:{$maxWidth}px;"{/ifset}>
+                <div class="card-header h4 text-muted pt-1 pb-2">
+                    {$title}
+                </div>
+                <div class="card-body {ifset $contentLeft}text-left{/ifset} {ifset $noPadding}p-0{/ifset}">
+                    {$content}
+                </div>
+            </div>
+        </div>
+    </div>
+{/define}

@@ -133,7 +133,7 @@ class AppPresenter
             if ($result === true) {
                 die(header('Location: '.Links::generateFull()));
             } else {
-                $form->addError('This username is already taken. Please pick a different one.');
+                $form['username']->addError('This username is already taken. Please pick a different one.');
             }
 
         };
@@ -145,6 +145,7 @@ class AppPresenter
         $params = [
             'form' => $form
         ];
+        Latte::setFormLayout($form);
         Latte::render('App/signup.latte', $params);
     }
 
