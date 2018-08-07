@@ -82,7 +82,7 @@ class Db
     {
         try {
             return dibi::query('
-                SELECT id, username, accessToken, counter, ts
+                SELECT id, username, accessToken, ts, counter
                 FROM [:table:]
                 ORDER BY id
             ')->fetchAll();

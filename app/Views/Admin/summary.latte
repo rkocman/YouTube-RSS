@@ -35,8 +35,8 @@
                             <th>id</th>
                             <th>username</th>
                             <th>connected</th>
-                            <th>counter</th>
                             <th>timestamp</th>
+                            <th>counter</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,8 +45,8 @@
                             <td>{$line['id']}</td>
                             <td>{$line['username']}</td>
                             <td>{$line['accessToken'] ? 'Yes' : 'No'}</td>
-                            <td>{$line['counter']}</td>
                             <td>{$line['ts']->format('Y-m-d H:i:s')}</td>
+                            <td>{$line['counter']}</td>
                         </tr>
                     {/foreach}
                     </tbody>
@@ -57,5 +57,5 @@
         {/if isset($line)}
     {/capture}
     {include contentBlock, title => $title, content => $content, noPadding => true}
-    
+
 {/block}
