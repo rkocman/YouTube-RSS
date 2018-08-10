@@ -53,7 +53,9 @@
                 </table>
             </div>
         {else}
-            No registered users.
+            <div class="p-3">
+                No registered users.
+            </div>
         {/if isset($line)}
     {/capture}
     {include contentBlock, title => $title, content => $content, noPadding => true}
