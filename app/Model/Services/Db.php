@@ -161,7 +161,7 @@ class Db
      * Updates user's use counter.
      * @param string username
      */
-    public static function updateCounter($username)
+    public static function updateUseCounter($username)
     {
         dibi::query('
             UPDATE [:table:] SET ', array(

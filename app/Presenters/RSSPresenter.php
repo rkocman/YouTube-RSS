@@ -36,8 +36,8 @@ class RSSPresenter
             die(header('Location: '.Links::generateFull()));
         }
 
-        // increase the counter
-        Db::updateCounter(Sessions::$user->username);
+        // increase the use counter
+        Db::updateUseCounter(Sessions::$user->username);
 
         // get data
         $data = null;
@@ -54,7 +54,7 @@ class RSSPresenter
         // debug results
         if (AppConfig::debugResults) {
             dump($data);
-            die();
+            exit;
         }
 
         // RSS

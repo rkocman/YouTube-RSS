@@ -29,6 +29,7 @@ class Engine
             if (AppConfig::devel) {
                 throw $e;
             }
+            Logger::log($e);
             if ($e instanceof \Dibi\Exception) {
                 Presenters\AppPresenter::showError('Some SQL error has occured!');
             } elseif ($e instanceof \Google_Exception) {

@@ -43,7 +43,7 @@ class YouTube
             self::$client->getHttpClient()->setDefaultOption('verify', false);
         }
 
-        if (!empty(Sessions::$user->accessToken)) {
+        if (Sessions::$user->isConnected()) {
             self::$client->setAccessToken(Sessions::$user->accessToken);
             if (self::$client->isAccessTokenExpired()) {
                 self::$client->refreshToken(Sessions::$user->refreshToken);
