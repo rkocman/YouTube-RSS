@@ -20,7 +20,7 @@
         Database connection: {YouTubeRSS\Model\Services\Db::$connected ? $statusOk : $statusFailed}<br>
         Database table: {$check ? $statusOk : $statusFailed}
         {if YouTubeRSS\Model\Services\Db::$connected && $check === false}
-            (<a href="{YouTubeRSS\Utils\Links::generate('admin','create-table')}">Create table</a>)
+            (<a href="{$links::generate('admin','create-table')}">Create table</a>)
         {/if}
     {/capture}
     {include contentBlock, title => $title, content => $content}

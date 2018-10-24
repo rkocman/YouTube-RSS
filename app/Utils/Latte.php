@@ -9,6 +9,7 @@ namespace YouTubeRSS\Utils;
 
 use YouTubeRSS\AppConfig;
 use Nette\Forms\Form;
+use YouTubeRSS\Constants;
 
 /**
  * Latte engine handler.
@@ -55,6 +56,9 @@ class Latte
     public static function render($template, array $params = []) 
     {
         $latte = self::getLatte();
+        $params['constants'] = Constants::class;
+        $params['links'] = Links::class;
+        $params['sessions'] = Sessions::class;
         $latte->render(Path::getViews().$template, $params);
     }
 
