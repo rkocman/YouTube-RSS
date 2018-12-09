@@ -37,7 +37,7 @@ class Links
     public static function generateFull($section = NULL, $action = NULL, $id = NULL)
     {
         $params = self::generate($section, $action, $id);
-        return 'http://'.$_SERVER['HTTP_HOST'].strtok($_SERVER['REQUEST_URI'],'?').$params;
+        return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].strtok($_SERVER['REQUEST_URI'],'?').$params;
     }
 
 }

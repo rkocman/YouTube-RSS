@@ -10,7 +10,7 @@ The resulting RSS replicates the old New Subscription Videos Feed that was avail
 ## Installation Guide
 
 To set up the application you will need several things beforehand:
-1. A web server that supports PHP (>=5.4) and MySQL
+1. A web server that supports PHP (>=7.1) and MySQL
 2. Dependency Manager for PHP: [Composer](https://getcomposer.org/)
 3. Own [Google Web Project](https://console.developers.google.com/) to access Google APIs
 

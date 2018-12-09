@@ -14,6 +14,7 @@ use YouTubeRSS\Utils\Links;
 use YouTubeRSS\AppConfig;
 use Nette\Utils\Json;
 use Nette\Utils\DateTime;
+use GuzzleHttp\Client;
 
 /**
  * YouTube model.
@@ -40,7 +41,10 @@ class YouTube
         self::$client->setApprovalPrompt('force');
 
         if (AppConfig::verifySslPeer === false) {
-            self::$client->getHttpClient()->setDefaultOption('verify', false);
+            $options = ['exceptions' => false];
+            $options['base_uri'] = self::$client->getConfig('base_path');
+            $options['verify'] = false;
+            self::$client->setHttpClient(new Client($options));
         }
 
         if (Sessions::$user->isConnected()) {

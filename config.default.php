@@ -14,7 +14,7 @@ namespace YouTubeRSS;
  */
 class DatabaseConfig
 {
-    const driver = 'mysql';
+    const driver = 'mysqli';
     const host = 'localhost';
     const username = 'admin';
     const password = '';

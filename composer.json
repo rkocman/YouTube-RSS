@@ -1,15 +1,15 @@
 {
     "config": {
         "platform": {
-            "php": "5.4.45"
+            "php": "7.1"
         }
     },
     "require": {
         "google/apiclient": "^2.0",
-        "dibi/dibi": "^3.0",
+        "dibi/dibi": "^4.0",
         "stil/curl-easy": "^1.1",
         "tracy/tracy": "^2.5",
-        "nette/robot-loader": "^2.3",
+        "nette/robot-loader": "^3.1",
         "latte/latte": "^2.4",
         "nette/caching": "^2.4",
         "nette/security": "^2.3",
