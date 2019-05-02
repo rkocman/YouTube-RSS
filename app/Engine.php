@@ -7,6 +7,8 @@
 
 namespace YouTubeRSS;
 
+use Tracy\Debugger;
+
 /**
  * This class controls the whole app.
  */
@@ -29,7 +31,7 @@ class Engine
             if (AppConfig::devel) {
                 throw $e;
             }
-            Logger::log($e);
+            Debugger::log($e);
             if ($e instanceof \Dibi\Exception) {
                 Presenters\AppPresenter::showError('Some SQL error has occured!');
             } elseif ($e instanceof \Google_Exception) {
