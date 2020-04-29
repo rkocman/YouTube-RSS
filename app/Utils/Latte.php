@@ -81,7 +81,7 @@ class Latte
             if (in_array($type, ['button', 'submit'], true)) {
                 $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
                 $usedPrimary = true;
-            } elseif (in_array($type, ['text', 'textarea', 'select', 'password'], true)) {
+            } elseif (in_array($type, [null, 'text', 'textarea', 'select', 'password'], true)) {
                 $control->getControlPrototype()->addClass('form-control');
             } elseif ($type === 'file') {
                 $control->getControlPrototype()->addClass('form-control-file');
