@@ -31,9 +31,9 @@ class Engine
             if (AppConfig::devel) {
                 throw $e;
             }
-            Debugger::log($e);
+            Debugger::log($e, Debugger::ERROR);
             if ($e instanceof \Dibi\Exception) {
-                Presenters\AppPresenter::showError('Some SQL error has occured!');
+                Presenters\AppPresenter::showError('Some SQL error has occurred!');
             } elseif ($e instanceof \Google_Exception) {
                 Presenters\AppPresenter::showError('A Google service error has occurred!');
             } else {

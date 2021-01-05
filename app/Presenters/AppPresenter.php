@@ -13,6 +13,7 @@ use YouTubeRSS\Utils\Params;
 use YouTubeRSS\Utils\Latte;
 use YouTubeRSS\Utils\Links;
 use Nette\Forms\Form;
+use Nette\Http\Response;
 
 /**
  * Presenter for the main app.
@@ -24,6 +25,8 @@ class AppPresenter
      */
     public static function showError($message)
     {
+        $response = new Response;
+        $response->setCode(Response::S500_INTERNAL_SERVER_ERROR);
         $params = [
             'error' => $message
         ];
