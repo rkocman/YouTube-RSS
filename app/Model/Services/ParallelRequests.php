@@ -10,6 +10,7 @@ namespace YouTubeRSS\Model\Services;
 use YouTubeRSS\Utils\Sessions;
 use YouTubeRSS\AppConfig;
 use Nette\Utils\Json;
+use Tracy\Debugger;
 
 /**
  * This class handles parallel requests on the YouTube API.
@@ -41,9 +42,16 @@ class ParallelRequests
             $content = $response->getContent();
             $result = Json::decode($content, Json::FORCE_ARRAY);
             if (isset($result['error'])) {
-                throw new \Exception('Invalid request response.');
-            }
-            ParallelRequests::$results[] = $result;
+                $request = $event->request->getOptions()->get(CURLOPT_URL);
+                $exception = new \Exception('Invalid request response: request: '.$request.'; response: '.$content.'.');
+                if (isset($result['error']['errors'][0]['reason']) && $result['error']['errors'][0]['reason'] === 'playlistNotFound') {
+                    Debugger::log($exception);
+                } else {
+                    throw $exception;
+                }
+            } else {
+                ParallelRequests::$results[] = $result;
+            }            
 
             if ($next = array_pop(ParallelRequests::$requests)) {
                 $event->queue->attach($next);
