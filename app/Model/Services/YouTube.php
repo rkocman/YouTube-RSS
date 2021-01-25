@@ -189,12 +189,19 @@ class YouTube
         }
         $response = ParallelRequests::executeRequests();
         
+        $videoIds = [];
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
                 if (
                     $item['snippet']['title'] === 'Private video'
                     && !isset($item['contentDetails']['videoPublishedAt'])
-                ) continue;
+                ) { 
+                    continue; 
+                }
+                if (isset($videoIds[ $item['snippet']['resourceId']['videoId'] ])) {
+                    continue;
+                }
+                $videoIds[ $item['snippet']['resourceId']['videoId'] ] = true;
                 $videos[] = [
                     'videoId' => $item['snippet']['resourceId']['videoId'],
                     'title' => $item['snippet']['title'],
