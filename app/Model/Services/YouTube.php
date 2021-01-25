@@ -191,6 +191,10 @@ class YouTube
         
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
+                if (
+                    $item['snippet']['title'] === 'Private video'
+                    && !isset($item['contentDetails']['videoPublishedAt'])
+                ) continue;
                 $videos[] = [
                     'videoId' => $item['snippet']['resourceId']['videoId'],
                     'title' => $item['snippet']['title'],
