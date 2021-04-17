@@ -18,7 +18,10 @@ use Nette\Security\Passwords;
  */
 class RegisteredUser
 {
-    /* users's login status */
+    /** @var \Nette\Security\Passwords */
+    private $passwords;
+
+    /* user's login status */
     private $logged;
 
     // user's data
@@ -30,6 +33,7 @@ class RegisteredUser
 
     public function __construct()
     {
+        $this->passwords = new Passwords;
         $this->logged = false;
         $this->connected = false;
     }
@@ -62,7 +66,7 @@ class RegisteredUser
         {
             $data = Db::getUserData($_SERVER['PHP_AUTH_USER']);
             if (!empty($data)) {
-                if (Passwords::verify($_SERVER['PHP_AUTH_PW'], $data['password'])) {
+                if ($this->passwords->verify($_SERVER['PHP_AUTH_PW'], $data['password'])) {
                 $this->id = $data['id'];
                 $this->username = $data['username'];
                 $this->logged = true;
@@ -100,7 +104,7 @@ class RegisteredUser
      */
     public function signUp($username, $password)
     {
-        $id = Db::insertUser($username, Passwords::hash($password));
+        $id = Db::insertUser($username, $this->passwords->hash($password));
         if ($id < 0) {
             return false;
         }

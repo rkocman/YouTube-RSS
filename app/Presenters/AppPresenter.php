@@ -129,7 +129,7 @@ class AppPresenter
             ->addRule(Form::EQUAL, 'Password mismatch.', $form['password']);
         $form->addSubmit('send', 'Sign up');
 
-        $form->onSuccess[] = function (Form $form, \stdClass $values) {
+        $form->onSuccess[] = function (Form $form, $values) {
 
             $result = Sessions::$user->signUp($values['username'], $values['password']);
 
