@@ -193,7 +193,10 @@ class YouTube
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
                 if (
-                    $item['snippet']['title'] === 'Private video'
+                    (
+                        $item['snippet']['title'] === 'Private video' ||
+                        $item['snippet']['title'] === 'Deleted video'
+                    )
                     && !isset($item['contentDetails']['videoPublishedAt'])
                 ) { 
                     continue; 
