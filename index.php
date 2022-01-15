@@ -9,7 +9,6 @@ namespace YouTubeRSS;
 
 use Tracy\Debugger;
 use Nette\Loaders\RobotLoader;
-use Tracy\Bridges\Nette\Bridge;
 
 // load a config
 require_once __DIR__.'/config.php';
@@ -22,7 +21,8 @@ $mode = (AppConfig::devel)? Debugger::DEVELOPMENT : Debugger::PRODUCTION;
 Debugger::enable($mode, __DIR__.'/log');
 Debugger::$maxDepth = 6;
 Debugger::$maxLength = 500;
-Bridge::initialize();
+\Tracy\Bridges\Nette\Bridge::initialize();
+\Latte\Bridges\Tracy\BlueScreenPanel::initialize();
 
 // robot loader for the app
 $loader = new RobotLoader;
