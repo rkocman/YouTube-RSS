@@ -1,14 +1,14 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Model\Services;
+namespace YTRSS\Model\Services;
 
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\AppConfig;
+use YTRSS\Utils\Sessions;
+use YTRSS\AppConfig;
 use Nette\Utils\Json;
 use Tracy\Debugger;
 

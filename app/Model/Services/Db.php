@@ -1,13 +1,13 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Model\Services;
+namespace YTRSS\Model\Services;
 
-use YouTubeRSS;
+use YTRSS;
 use dibi;
 
 /**
@@ -25,14 +25,14 @@ class Db
     {
         try {
             dibi::connect(array(
-                'driver'   => YouTubeRSS\DatabaseConfig::driver,
-                'host'     => YouTubeRSS\DatabaseConfig::host,
-                'username' => YouTubeRSS\DatabaseConfig::username,
-                'password' => YouTubeRSS\DatabaseConfig::password,
-                'database' => YouTubeRSS\DatabaseConfig::database,
+                'driver'   => YTRSS\DatabaseConfig::driver,
+                'host'     => YTRSS\DatabaseConfig::host,
+                'username' => YTRSS\DatabaseConfig::username,
+                'password' => YTRSS\DatabaseConfig::password,
+                'database' => YTRSS\DatabaseConfig::database,
                 'charset'  => 'utf8',
             ));
-            dibi::getSubstitutes()->{'table'} = YouTubeRSS\DatabaseConfig::table;
+            dibi::getSubstitutes()->{'table'} = YTRSS\DatabaseConfig::table;
             self::$connected = true;
         } catch (Dibi\Exception $e) {}
     }
@@ -47,8 +47,8 @@ class Db
             $count = dibi::query('
                 SELECT count(*)
                 FROM information_schema.tables
-                WHERE table_schema = %s', YouTubeRSS\DatabaseConfig::database,'
-                    AND table_name = %s', YouTubeRSS\DatabaseConfig::table,'
+                WHERE table_schema = %s', YTRSS\DatabaseConfig::database,'
+                    AND table_name = %s', YTRSS\DatabaseConfig::table,'
             ')->fetchSingle();
 
             return ($count)? true : false;

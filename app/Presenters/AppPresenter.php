@@ -1,17 +1,17 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Presenters;
+namespace YTRSS\Presenters;
 
-use YouTubeRSS\Model\Services\YouTube;
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\Utils\Params;
-use YouTubeRSS\Utils\Latte;
-use YouTubeRSS\Utils\Links;
+use YTRSS\Model\Services\YouTube;
+use YTRSS\Utils\Sessions;
+use YTRSS\Utils\Params;
+use YTRSS\Utils\Latte;
+use YTRSS\Utils\Links;
 use Nette\Forms\Form;
 use Nette\Http\Response;
 

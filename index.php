@@ -1,11 +1,11 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS;
+namespace YTRSS;
 
 use Tracy\Debugger;
 use Nette\Loaders\RobotLoader;

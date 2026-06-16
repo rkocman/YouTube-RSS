@@ -1,11 +1,11 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Utils;
+namespace YTRSS\Utils;
 
 /**
  * This class serves paths for various derictories.

@@ -3,11 +3,11 @@
 // FILL and RENAME to config.php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS;
+namespace YTRSS;
 
 /**
  * Database configuration.

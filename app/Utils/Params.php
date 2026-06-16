@@ -1,11 +1,11 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Utils;
+namespace YTRSS\Utils;
 
 /**
  * Handler for the app parameters.

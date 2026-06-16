@@ -1,15 +1,15 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Utils;
+namespace YTRSS\Utils;
 
-use YouTubeRSS\AppConfig;
+use YTRSS\AppConfig;
 use Nette\Forms\Form;
-use YouTubeRSS\Constants;
+use YTRSS\Constants;
 
 /**
  * Latte engine handler.

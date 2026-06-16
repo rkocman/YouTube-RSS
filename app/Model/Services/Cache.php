@@ -1,15 +1,15 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Model\Services;
+namespace YTRSS\Model\Services;
 
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\Utils\Path;
-use YouTubeRSS\AppConfig;
+use YTRSS\Utils\Sessions;
+use YTRSS\Utils\Path;
+use YTRSS\AppConfig;
 use Nette\Caching;
 use Nette\Caching\Storages\FileStorage;
 

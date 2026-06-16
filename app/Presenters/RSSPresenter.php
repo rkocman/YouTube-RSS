@@ -1,19 +1,19 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Presenters;
+namespace YTRSS\Presenters;
 
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\Utils\Links;
-use YouTubeRSS\Utils\Latte;
-use YouTubeRSS\Model\Services\Db;
-use YouTubeRSS\Model\Services\YouTube;
-use YouTubeRSS\Model\Services\Cache;
-use YouTubeRSS\AppConfig;
+use YTRSS\Utils\Sessions;
+use YTRSS\Utils\Links;
+use YTRSS\Utils\Latte;
+use YTRSS\Model\Services\Db;
+use YTRSS\Model\Services\YouTube;
+use YTRSS\Model\Services\Cache;
+use YTRSS\AppConfig;
 
 /**
  * Presenter for RSS functions.

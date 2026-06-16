@@ -1,15 +1,15 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Model\Users;
+namespace YTRSS\Model\Users;
 
-use YouTubeRSS\Constants;
-use YouTubeRSS\AdminConfig;
-use YouTubeRSS\Utils\Sessions;
+use YTRSS\Constants;
+use YTRSS\AdminConfig;
+use YTRSS\Utils\Sessions;
 
 /**
  * The admin of the app.

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Model\Services;
+namespace YTRSS\Model\Services;
 
 use Google_Client;
-use YouTubeRSS\YouTubeConfig;
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\Utils\Links;
-use YouTubeRSS\AppConfig;
+use YTRSS\YouTubeConfig;
+use YTRSS\Utils\Sessions;
+use YTRSS\Utils\Links;
+use YTRSS\AppConfig;
 use Nette\Utils\Json;
 use Nette\Utils\DateTime;
 use GuzzleHttp\Client;

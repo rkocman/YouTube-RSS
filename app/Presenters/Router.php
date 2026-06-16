@@ -1,13 +1,13 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Presenters;
+namespace YTRSS\Presenters;
 
-use YouTubeRSS\Utils\Params;
+use YTRSS\Utils\Params;
 
 /**
  * Request router.

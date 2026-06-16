@@ -1,16 +1,16 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Model\Users;
+namespace YTRSS\Model\Users;
 
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\Model\Services\Db;
-use YouTubeRSS\Model\Services\YouTube;
-use YouTubeRSS\Constants;
+use YTRSS\Utils\Sessions;
+use YTRSS\Model\Services\Db;
+use YTRSS\Model\Services\YouTube;
+use YTRSS\Constants;
 use Nette\Security\Passwords;
 
 /**

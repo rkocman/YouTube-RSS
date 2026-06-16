@@ -1,17 +1,17 @@
 <?php
 
 /**
- * YouTube RSS
+ * YT RSS
  * Author: Radim Kocman
  */
 
-namespace YouTubeRSS\Presenters;
+namespace YTRSS\Presenters;
 
-use YouTubeRSS\Utils\Sessions;
-use YouTubeRSS\Utils\Params;
-use YouTubeRSS\Utils\Links;
-use YouTubeRSS\Utils\Latte;
-use YouTubeRSS\Model\Services\Db;
+use YTRSS\Utils\Sessions;
+use YTRSS\Utils\Params;
+use YTRSS\Utils\Links;
+use YTRSS\Utils\Latte;
+use YTRSS\Model\Services\Db;
 
 /**
  * Presenter for the admin section.
