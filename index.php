@@ -22,7 +22,6 @@ Debugger::enable($mode, __DIR__.'/log');
 Debugger::$maxDepth = 6;
 Debugger::$maxLength = 500;
 \Tracy\Bridges\Nette\Bridge::initialize();
-\Latte\Bridges\Tracy\BlueScreenPanel::initialize();
 
 // robot loader for the app
 $loader = new RobotLoader;

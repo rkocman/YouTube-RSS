@@ -104,7 +104,7 @@ class YouTube
 
         // sort the videos by their published time
         usort($videos, function($a, $b) {
-            return $a['publishedAt']<$b['publishedAt'];
+            return $b['publishedAt'] <=> $a['publishedAt'];
         });
 
         // keep the first [maxResults] videos
@@ -134,7 +134,8 @@ class YouTube
 
             foreach ($response[0]['items'] as $item) {
                 if ($item['kind'] === 'youtube#subscription') {
-                    $channels[] = $item['snippet']['resourceId']['channelId'];
+                    $channelId = $item['snippet']['resourceId']['channelId'];
+                    $channels[$channelId] = $channelId;
                 }
             }
 
@@ -165,7 +166,8 @@ class YouTube
 
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
-                $playlists[] = $item['contentDetails']['relatedPlaylists']['uploads'];
+                $uploads = $item['contentDetails']['relatedPlaylists']['uploads'];
+                $playlists[$uploads] = $uploads;
             }
         }
         return $playlists;
@@ -189,7 +191,6 @@ class YouTube
         }
         $response = ParallelRequests::executeRequests();
         
-        $videoIds = [];
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
                 if (
@@ -201,12 +202,9 @@ class YouTube
                 ) { 
                     continue; 
                 }
-                if (isset($videoIds[ $item['snippet']['resourceId']['videoId'] ])) {
-                    continue;
-                }
-                $videoIds[ $item['snippet']['resourceId']['videoId'] ] = true;
-                $videos[] = [
-                    'videoId' => $item['snippet']['resourceId']['videoId'],
+                $videoId = $item['snippet']['resourceId']['videoId'];
+                $videos[$videoId] = [
+                    'videoId' => $videoId,
                     'title' => $item['snippet']['title'],
                     'description' => $item['snippet']['description'],
                     'channel' => $item['snippet']['channelTitle'],
@@ -244,7 +242,7 @@ class YouTube
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
                 $details[ $item['id'] ] = [
-                    'duration' => self::convertDurationFormat($item['contentDetails']['duration'])
+                    'duration' => self::convertDurationFormat($item['contentDetails']['duration'] ?? null)
                 ];
             }
         }

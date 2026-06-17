@@ -1,14 +1,14 @@
 {layout '../@layout.latte'}
 {import '../App/parts/contentBlock.latte'}
 
-{capture $statusOk}
-    <span class="text-success">OK</span>
-{/capture}
-{capture $statusFailed}
-    <span class="text-danger">FAILED</span>
-{/capture}
-
 {block content}
+    {capture $statusOk}
+        <span class="text-success">OK</span>
+    {/capture}
+    {capture $statusFailed}
+        <span class="text-danger">FAILED</span>
+    {/capture}
+
     <div class="row mb-3">
         <div class="col">
             <h2>Admin Summary</h2>

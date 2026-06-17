@@ -1,20 +1,20 @@
 {
     "config": {
         "platform": {
-            "php": "7.3"
+            "php": "8.2"
         }
     },
     "require": {
         "google/apiclient": "^2.0",
-        "dibi/dibi": "^4.0",
-        "stil/curl-easy": "^1.1",
+        "dibi/dibi": "^5.0",
         "tracy/tracy": "^2.5",
-        "nette/robot-loader": "^3.1",
-        "latte/latte": "^2.4",
+        "nette/robot-loader": "^4.1",
+        "latte/latte": "^3.1",
         "nette/caching": "^3.0",
         "nette/security": "^3.0",
         "nette/forms": "^3.0",
-        "nette/utils": "^3.0"
+        "nette/utils": "^4.0",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "replace": {
         "google/apiclient-services": "*"

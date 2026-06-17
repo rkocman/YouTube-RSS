@@ -7,6 +7,11 @@
 
 namespace YTRSS\Model\Services;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Pool;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use YTRSS\Utils\Sessions;
 use YTRSS\AppConfig;
 use Nette\Utils\Json;
@@ -17,52 +22,24 @@ use Tracy\Debugger;
  */
 class ParallelRequests
 {
-    /** @var \cURL\RequestsQueue */
-    private static $queue;
-    private static $requests;
-
-    /** @var array */
-    private static $results;
+    private static Client $client;
+    /** @var Request[] */
+    private static array $requests;
+    private static array $results;
 
     /**
      * Inits the requests queue.
      */
     public static function init()
     {
-        $accessToken = Json::decode(Sessions::$user->accessToken, Json::FORCE_ARRAY);
-        $header = [
-            'Authorization: Bearer '.$accessToken['access_token']
-        ];
-        self::$queue = new \cURL\RequestsQueue;
-        self::$queue->getDefaultOptions()
-            ->set(CURLOPT_HTTPHEADER, $header)
-            ->set(CURLOPT_RETURNTRANSFER, true);
-        self::$queue->addListener('complete', function (\cURL\Event $event) {
-            $response = $event->response;
-            $content = $response->getContent();
-            $result = Json::decode($content, Json::FORCE_ARRAY);
-            if (isset($result['error'])) {
-                $request = $event->request->getOptions()->get(CURLOPT_URL);
-                $exception = new \Exception('Invalid request response: request: '.$request.'; response: '.$content.'.');
-                if (isset($result['error']['errors'][0]['reason']) && $result['error']['errors'][0]['reason'] === 'playlistNotFound') {
-                    Debugger::log($exception);
-                } else {
-                    throw $exception;
-                }
-            } else {
-                ParallelRequests::$results[] = $result;
-            }            
-
-            if ($next = array_pop(ParallelRequests::$requests)) {
-                $event->queue->attach($next);
-            }
-        });
-
-        if (AppConfig::verifySslPeer === false) {
-            self::$queue->getDefaultOptions()
-                ->set(CURLOPT_SSL_VERIFYPEER, false);
-        }
-        
+        $accessToken = Json::decode(Sessions::$user->accessToken, true);
+        self::$client = new Client([
+            'headers' => [
+                'Authorization' => 'Bearer '.$accessToken['access_token']
+            ],
+            'verify' => AppConfig::verifySslPeer,
+            'http_errors' => false
+        ]);
         self::$requests = [];
         self::$results = [];
     }
@@ -72,7 +49,7 @@ class ParallelRequests
      */
     public static function addRequest($url, $data)
     {
-        $request = new \cURL\Request($url.'?'.http_build_query($data));
+        $request = new Request('GET', $url.'?'.http_build_query($data));
         self::$requests[] = $request;
     }
 
@@ -82,11 +59,30 @@ class ParallelRequests
      */
     public static function executeRequests()
     {
-        for ($i = 0; $i < AppConfig::parallelRequests && count(self::$requests) > 0; $i++) {
-            self::$queue->attach(array_pop(self::$requests));
-        }
-        self::$queue->send();
+        $pool = new Pool(self::$client, self::$requests, [
+            'concurrency' => AppConfig::parallelRequests,
+            'fulfilled' => function (Response $response, $index) {
+                $result = Json::decode($response->getBody()->getContents(), true);
+                if (isset($result['error'])) {
+                    $request = self::$requests[$index]->getUri();
+                    $exception = new \Exception('Invalid request response: request: '.$request.'; response: '.$response->getBody()->getContents().'.');
+                    if (isset($result['error']['errors'][0]['reason']) && $result['error']['errors'][0]['reason'] === 'playlistNotFound') {
+                        Debugger::log($exception);
+                    } else {
+                        throw $exception;
+                    }
+                } else {
+                    ParallelRequests::$results[] = $result;
+                }
+            },
+            'rejected' => function (RequestException $reason, $index) {
+                throw $reason;
+            },
+        ]);
+        $pool->promise()->wait();
+
         $results = self::$results;
+        self::$requests = [];
         self::$results = [];
         return $results;
     }
