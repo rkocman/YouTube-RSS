@@ -18,8 +18,7 @@ use Nette\Caching\Storages\FileStorage;
  */
 class Cache 
 {
-    /** \Nette\Caching\Cache */
-    private static $cache = null;
+    private static ?\Nette\Caching\Cache $cache = null;
 
     /** @return \Nette\Caching\Cache  */
     private static function getCache()
@@ -32,13 +31,13 @@ class Cache
     }
 
     /**
-     * Saves user's reults.
+     * Saves user's results.
      */
     public static function saveResults($data)
     {
         $cache = self::getCache();
         $cache->save(Sessions::$user->id, $data, [
-            Caching\Cache::EXPIRE => AppConfig::cacheTime.' minutes'
+            Caching\Cache::Expire => AppConfig::cacheTime.' minutes'
         ]);
     }
 
@@ -49,6 +48,24 @@ class Cache
     {
         $cache = self::getCache();
         return $cache->load(Sessions::$user->id);
+    }
+
+    /**
+     * Saves channel's uploads playlist.
+     */
+    public static function saveUploadsPlaylist($channelId, $playlistId)
+    {
+        $cache = self::getCache();
+        $cache->save('uploads_playlist_'.$channelId, $playlistId);
+    }
+
+    /**
+     * Loads channel's uploads playlist.
+     */
+    public static function loadUploadsPlaylist($channelId)
+    {
+        $cache = self::getCache();
+        return $cache->load('uploads_playlist_'.$channelId);
     }
 
 }

@@ -151,7 +151,17 @@ class YouTube
     private static function getChannelsUploadsPlaylists($channels)
     {
         $playlists = [];
-        $chunks = array_chunk($channels, 50);
+        $new = [];
+        foreach ($channels as $channelId) {
+            $value = Cache::loadUploadsPlaylist($channelId);
+            if ($value === null) {
+                $new[] = $channelId;
+            } else {
+                $playlists[$value] = $value;
+            }
+        }
+
+        $chunks = array_chunk($new, 50);
         foreach ($chunks as $chunk) {
             $url = self::$baseUrl.'channels';
             $data = [
@@ -167,6 +177,7 @@ class YouTube
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
                 $uploads = $item['contentDetails']['relatedPlaylists']['uploads'];
+                Cache::saveUploadsPlaylist($item['id'], $uploads);
                 $playlists[$uploads] = $uploads;
             }
         }
