@@ -65,7 +65,7 @@ class ParallelRequests
                 $result = Json::decode($response->getBody()->getContents(), true);
                 if (isset($result['error'])) {
                     $request = self::$requests[$index]->getUri();
-                    $exception = new \Exception('Invalid request response: request: '.$request.'; response: '.$response->getBody()->getContents().'.');
+                    $exception = new \Exception('Invalid request response: status: '.$response->getStatusCode().'; request: '.$request.'; response: '.$response->getBody()->getContents().'.');
                     if (isset($result['error']['errors'][0]['reason']) && $result['error']['errors'][0]['reason'] === 'playlistNotFound') {
                         Debugger::log($exception);
                     } else {
