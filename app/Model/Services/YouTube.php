@@ -116,6 +116,7 @@ class YouTube
         return $videos;
     }
 
+    /** @return array<string,string> */
     private static function getSubscribedChannels()
     {
         $channels = [];
@@ -129,7 +130,7 @@ class YouTube
                 'fields' => 'items/snippet/resourceId/channelId,items/kind,nextPageToken',
                 'pageToken' => $next
             ];
-            ParallelRequests::addRequest($url, $data);
+            ParallelRequests::addRequest($url, $data, ['action' => 'getSubscribedChannels']);
             $response = ParallelRequests::executeRequests();
 
             foreach ($response[0]['items'] as $item) {
@@ -148,6 +149,10 @@ class YouTube
         return $channels;
     }
 
+    /**
+     * @param array<string,string> $channels
+     * @return array<string,string>
+     */
     private static function getChannelsUploadsPlaylists($channels)
     {
         $playlists = [];
@@ -157,7 +162,7 @@ class YouTube
             if ($value === null) {
                 $new[] = $channelId;
             } else {
-                $playlists[$value] = $value;
+                $playlists[$channelId] = $value;
             }
         }
 
@@ -171,24 +176,29 @@ class YouTube
                     .'items/contentDetails/relatedPlaylists/uploads',
                 'maxResults' => 50
             ];
-            ParallelRequests::addRequest($url, $data);
+            ParallelRequests::addRequest($url, $data, ['action' => 'getChannelsUploadsPlaylists']);
         }
         $response = ParallelRequests::executeRequests();
 
         foreach ($response as $request) {
             foreach ($request['items'] as $item) {
+                $channelId = $item['id'];
                 $uploads = $item['contentDetails']['relatedPlaylists']['uploads'];
-                Cache::saveUploadsPlaylist($item['id'], $uploads);
-                $playlists[$uploads] = $uploads;
+                Cache::saveUploadsPlaylist($channelId, $uploads);
+                $playlists[$channelId] = $uploads;
             }
         }
         return $playlists;
     }
 
+    /**
+     * @param array<string,string> $playlists
+     * @return array<string,array<string,mixed>>
+     */
     private static function getPlaylistsVideos($playlists)
     {
         $videos = [];
-        foreach ($playlists as $playlist) {
+        foreach ($playlists as $channelId => $playlist) {
             $url = self::$baseUrl.'playlistItems';
             $data = [
                 'part' => 'snippet,contentDetails',
@@ -199,7 +209,7 @@ class YouTube
                     .'items/contentDetails/videoPublishedAt',
                 'maxResults' => AppConfig::videosPerChannel
             ];
-            ParallelRequests::addRequest($url, $data);
+            ParallelRequests::addRequest($url, $data, ['action' => 'getPlaylistsVideos', 'channelId' => $channelId, 'playlistId' => $playlist]);
         }
         $response = ParallelRequests::executeRequests();
         
@@ -230,6 +240,9 @@ class YouTube
         return $videos;
     }
 
+    /**
+     * @param array<string,array<string,mixed>> $videos
+     */
     private static function fillVideosDetails(&$videos)
     {
         $details = array();
@@ -247,7 +260,7 @@ class YouTube
                 'fields' => 'items/id,items/contentDetails/duration',
                 'maxResults' => 50
             ];
-            ParallelRequests::addRequest($url, $data);
+            ParallelRequests::addRequest($url, $data, ['action' => 'fillVideosDetails']);
         }
         $response = ParallelRequests::executeRequests();
 

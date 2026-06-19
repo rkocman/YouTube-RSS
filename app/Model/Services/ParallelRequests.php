@@ -25,6 +25,7 @@ class ParallelRequests
     private static Client $client;
     /** @var Request[] */
     private static array $requests;
+    private static array $contexts;
     private static array $results;
 
     /**
@@ -47,10 +48,11 @@ class ParallelRequests
     /**
      * Adds a request into the queue.
      */
-    public static function addRequest($url, $data)
+    public static function addRequest($url, $data, $context = null)
     {
         $request = new Request('GET', $url.'?'.http_build_query($data));
         self::$requests[] = $request;
+        self::$contexts[] = $context;
     }
 
     /**
@@ -65,7 +67,8 @@ class ParallelRequests
                 $result = Json::decode($response->getBody()->getContents(), true);
                 if (isset($result['error'])) {
                     $request = self::$requests[$index]->getUri();
-                    $exception = new \Exception('Invalid request response: status: '.$response->getStatusCode().'; request: '.$request.'; response: '.$response->getBody()->getContents().'.');
+                    $context = self::$contexts[$index];
+                    $exception = new \Exception('Invalid request response: status: '.$response->getStatusCode().'; context: '.json_encode($context).'; request: '.$request.'; response: '.$response->getBody()->getContents().'.');
                     if (isset($result['error']['errors'][0]['reason']) && $result['error']['errors'][0]['reason'] === 'playlistNotFound') {
                         Debugger::log($exception);
                     } else {
@@ -83,6 +86,7 @@ class ParallelRequests
 
         $results = self::$results;
         self::$requests = [];
+        self::$contexts = [];
         self::$results = [];
         return $results;
     }
