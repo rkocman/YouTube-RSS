@@ -167,7 +167,8 @@ class YouTube
             $data = [
                 'part' => 'contentDetails',
                 'id' => implode(',', $chunk),
-                'fields' => 'items/contentDetails/relatedPlaylists/uploads',
+                'fields' => 'items/id,'
+                    .'items/contentDetails/relatedPlaylists/uploads',
                 'maxResults' => 50
             ];
             ParallelRequests::addRequest($url, $data);
