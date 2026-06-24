@@ -1,11 +1,11 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS;
+namespace MetroRSS;
 
 use Tracy\Debugger;
 use Nette\Loaders\RobotLoader;

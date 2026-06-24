@@ -1,15 +1,14 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS;
+namespace MetroRSS;
 
 class Constants
 {
-    const title = 'YT RSS';
-    const moto = 'Aggregated RSS of your YouTube subscriptions';
+    const title = 'Metro RSS';
     const author = 'Radim Kocman';
 }

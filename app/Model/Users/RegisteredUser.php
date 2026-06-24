@@ -1,16 +1,16 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Model\Users;
+namespace MetroRSS\Model\Users;
 
-use YTRSS\Utils\Sessions;
-use YTRSS\Model\Services\Db;
-use YTRSS\Model\Services\YouTube;
-use YTRSS\Constants;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\Model\Services\Db;
+use MetroRSS\Model\Services\YouTube;
+use MetroRSS\Constants;
 use Nette\Security\Passwords;
 
 /**

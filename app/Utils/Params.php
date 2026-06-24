@@ -1,11 +1,11 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Utils;
+namespace MetroRSS\Utils;
 
 /**
  * Handler for the app parameters.

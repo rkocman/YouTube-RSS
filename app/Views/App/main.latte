@@ -15,11 +15,13 @@
         {/capture}
         {include contentBlock, title => $title, content => $content, maxWidth => 250}
 
-        {var $title = 'Sign Up'}
-        {capture $content}
-            <a href="{$links::generate('signup')}">Start</a><br>
-        {/capture}
-        {include contentBlock, title => $title, content => $content, maxWidth => 250}
+        {if MetroRSS\AppConfig::allowSignUp}
+            {var $title = 'Sign Up'}
+            {capture $content}
+                <a href="{$links::generate('signup')}">Start</a><br>
+            {/capture}
+            {include contentBlock, title => $title, content => $content, maxWidth => 250}
+        {/if}
 
     {else}
 

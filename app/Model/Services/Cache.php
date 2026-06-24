@@ -1,15 +1,15 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Model\Services;
+namespace MetroRSS\Model\Services;
 
-use YTRSS\Utils\Sessions;
-use YTRSS\Utils\Path;
-use YTRSS\AppConfig;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\Utils\Path;
+use MetroRSS\AppConfig;
 use Nette\Caching;
 use Nette\Caching\Storages\FileStorage;
 
@@ -37,7 +37,7 @@ class Cache
     {
         $cache = self::getCache();
         $cache->save(Sessions::$user->id, $data, [
-            Caching\Cache::Expire => AppConfig::cacheTime.' minutes'
+            Caching\Cache::Expire => AppConfig::cacheResultTime.' minutes'
         ]);
     }
 
@@ -56,7 +56,9 @@ class Cache
     public static function saveUploadsPlaylist($channelId, $playlistId)
     {
         $cache = self::getCache();
-        $cache->save('uploads_playlist_'.$channelId, $playlistId);
+        $cache->save('uploads_playlist_'.$channelId, $playlistId, [
+            Caching\Cache::Expire => AppConfig::cachePlaylistTime.' minutes'
+        ]);
     }
 
     /**

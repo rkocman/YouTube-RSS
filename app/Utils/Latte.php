@@ -1,15 +1,15 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Utils;
+namespace MetroRSS\Utils;
 
-use YTRSS\AppConfig;
+use MetroRSS\AppConfig;
 use Nette\Forms\Form;
-use YTRSS\Constants;
+use MetroRSS\Constants;
 
 /**
  * Latte engine handler.

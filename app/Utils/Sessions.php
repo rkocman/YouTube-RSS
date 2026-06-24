@@ -1,24 +1,24 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Utils;
+namespace MetroRSS\Utils;
 
-use YTRSS\Model\Users;
-use YTRSS\AppConfig;
+use MetroRSS\Model\Users;
+use MetroRSS\AppConfig;
 
 /**
  * Session handler.
  */
 class Sessions
 {
-    /** @var \YTRSS\Model\Users\RegisteredUser */
+    /** @var \MetroRSS\Model\Users\RegisteredUser */
     public static $user;
     
-    /** @var \YTRSS\Model\Users\Admin */
+    /** @var \MetroRSS\Model\Users\Admin */
     public static $admin;
     
     /** Remembers if the user tried to log out. */
@@ -46,7 +46,7 @@ class Sessions
 
     /**
      * Creates a new instance of the registered user.
-     * @return \YTRSS\Model\Users\RegisteredUser
+     * @return \MetroRSS\Model\Users\RegisteredUser
      */
     public static function resetUser()
     {
@@ -57,7 +57,7 @@ class Sessions
 
     /**
      * Creates a new instance of the admin user.
-     * @return \YTRSS\Model\Users\Admin
+     * @return \MetroRSS\Model\Users\Admin
      */
     public static function resetAdmin()
     {

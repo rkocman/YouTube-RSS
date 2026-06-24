@@ -1,19 +1,19 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Model\Services;
+namespace MetroRSS\Model\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use YTRSS\Utils\Sessions;
-use YTRSS\AppConfig;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\AppConfig;
 use Nette\Utils\Json;
 use Tracy\Debugger;
 

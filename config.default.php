@@ -3,11 +3,11 @@
 // FILL and RENAME to config.php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS;
+namespace MetroRSS;
 
 /**
  * Database configuration.
@@ -19,7 +19,7 @@ class DatabaseConfig
     const username = 'admin';
     const password = '';
     const database = 'test';
-    const table = 'youtuberss';
+    const table = 'metrorss';
 }
 
 /**
@@ -48,10 +48,13 @@ class AppConfig
     const devel = false;
     const debugResults = false;
 
-    const cache = false;
-    const cacheTime = 120; // in minutes
+    const allowSignUp = true;
 
-    const sessionName = 'youtuberss';
+    const cacheResult = false;
+    const cacheResultTime = 2 * 60; // in minutes
+    const cachePlaylistTime = 24 * 60; // in minutes
+
+    const sessionName = 'metrorss';
 
     const phpTimeLimit = 300; // in seconds
 

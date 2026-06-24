@@ -1,4 +1,4 @@
-YT RSS
+Metro RSS
 ========
 This application creates an aggregated RSS of all your YouTube subscriptions. It is designed as a web application that should run on a server and that can maintain multiple independent accounts for several users.
 

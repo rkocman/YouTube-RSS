@@ -1,17 +1,18 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Presenters;
+namespace MetroRSS\Presenters;
 
-use YTRSS\Model\Services\YouTube;
-use YTRSS\Utils\Sessions;
-use YTRSS\Utils\Params;
-use YTRSS\Utils\Latte;
-use YTRSS\Utils\Links;
+use MetroRSS\AppConfig;
+use MetroRSS\Model\Services\YouTube;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\Utils\Params;
+use MetroRSS\Utils\Latte;
+use MetroRSS\Utils\Links;
 use Nette\Forms\Form;
 use Nette\Http\Response;
 
@@ -52,7 +53,7 @@ class AppPresenter
 
         // sign up
         if (Params::$section === 'signup') {
-            if (Sessions::$user->isLogged()) {
+            if (Sessions::$user->isLogged() || !AppConfig::allowSignUp) {
                 die(header('Location: '.Links::generateFull()));
             }
             self::signUp();

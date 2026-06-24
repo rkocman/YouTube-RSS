@@ -1,19 +1,19 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Presenters;
+namespace MetroRSS\Presenters;
 
-use YTRSS\Utils\Sessions;
-use YTRSS\Utils\Links;
-use YTRSS\Utils\Latte;
-use YTRSS\Model\Services\Db;
-use YTRSS\Model\Services\YouTube;
-use YTRSS\Model\Services\Cache;
-use YTRSS\AppConfig;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\Utils\Links;
+use MetroRSS\Utils\Latte;
+use MetroRSS\Model\Services\Db;
+use MetroRSS\Model\Services\YouTube;
+use MetroRSS\Model\Services\Cache;
+use MetroRSS\AppConfig;
 
 /**
  * Presenter for RSS functions.
@@ -41,12 +41,12 @@ class RSSPresenter
 
         // get data
         $data = null;
-        if (AppConfig::cache) {
+        if (AppConfig::cacheResult) {
             $data = Cache::loadResults();
         }
         if ($data === null) {
             $data = YouTube::getNewSubscriptionVideos();
-            if (AppConfig::cache) {
+            if (AppConfig::cacheResult) {
                 Cache::saveResults($data);
             }
         }

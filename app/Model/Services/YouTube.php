@@ -1,17 +1,17 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Model\Services;
+namespace MetroRSS\Model\Services;
 
 use Google_Client;
-use YTRSS\YouTubeConfig;
-use YTRSS\Utils\Sessions;
-use YTRSS\Utils\Links;
-use YTRSS\AppConfig;
+use MetroRSS\YouTubeConfig;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\Utils\Links;
+use MetroRSS\AppConfig;
 use Nette\Utils\Json;
 use Nette\Utils\DateTime;
 use GuzzleHttp\Client;

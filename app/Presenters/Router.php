@@ -1,13 +1,13 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Presenters;
+namespace MetroRSS\Presenters;
 
-use YTRSS\Utils\Params;
+use MetroRSS\Utils\Params;
 
 /**
  * Request router.

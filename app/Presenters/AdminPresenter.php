@@ -1,17 +1,17 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Presenters;
+namespace MetroRSS\Presenters;
 
-use YTRSS\Utils\Sessions;
-use YTRSS\Utils\Params;
-use YTRSS\Utils\Links;
-use YTRSS\Utils\Latte;
-use YTRSS\Model\Services\Db;
+use MetroRSS\Utils\Sessions;
+use MetroRSS\Utils\Params;
+use MetroRSS\Utils\Links;
+use MetroRSS\Utils\Latte;
+use MetroRSS\Model\Services\Db;
 
 /**
  * Presenter for the admin section.

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Model\Services;
+namespace MetroRSS\Model\Services;
 
-use YTRSS;
+use MetroRSS;
 use dibi;
 
 /**
@@ -25,14 +25,14 @@ class Db
     {
         try {
             dibi::connect(array(
-                'driver'   => YTRSS\DatabaseConfig::driver,
-                'host'     => YTRSS\DatabaseConfig::host,
-                'username' => YTRSS\DatabaseConfig::username,
-                'password' => YTRSS\DatabaseConfig::password,
-                'database' => YTRSS\DatabaseConfig::database,
+                'driver'   => MetroRSS\DatabaseConfig::driver,
+                'host'     => MetroRSS\DatabaseConfig::host,
+                'username' => MetroRSS\DatabaseConfig::username,
+                'password' => MetroRSS\DatabaseConfig::password,
+                'database' => MetroRSS\DatabaseConfig::database,
                 'charset'  => 'utf8',
             ));
-            dibi::getSubstitutes()->{'table'} = YTRSS\DatabaseConfig::table;
+            dibi::getSubstitutes()->{'table'} = MetroRSS\DatabaseConfig::table;
             self::$connected = true;
         } catch (Dibi\Exception $e) {}
     }
@@ -47,8 +47,8 @@ class Db
             $count = dibi::query('
                 SELECT count(*)
                 FROM information_schema.tables
-                WHERE table_schema = %s', YTRSS\DatabaseConfig::database,'
-                    AND table_name = %s', YTRSS\DatabaseConfig::table,'
+                WHERE table_schema = %s', MetroRSS\DatabaseConfig::database,'
+                    AND table_name = %s', MetroRSS\DatabaseConfig::table,'
             ')->fetchSingle();
 
             return ($count)? true : false;

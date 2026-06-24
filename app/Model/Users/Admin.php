@@ -1,15 +1,15 @@
 <?php
 
 /**
- * YT RSS
+ * Metro RSS
  * Author: Radim Kocman
  */
 
-namespace YTRSS\Model\Users;
+namespace MetroRSS\Model\Users;
 
-use YTRSS\Constants;
-use YTRSS\AdminConfig;
-use YTRSS\Utils\Sessions;
+use MetroRSS\Constants;
+use MetroRSS\AdminConfig;
+use MetroRSS\Utils\Sessions;
 
 /**
  * The admin of the app.
